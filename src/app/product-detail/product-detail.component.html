@@ -1,0 +1,24 @@
+<div *ngIf="product">
+  <h2>{{ product.name }}</h2>
+  <p>{{ product.description }}</p>
+  <div>
+    <label>Quantity:</label>
+    <input type="number" [(ngModel)]="quantity" />
+    <button (click)="addToCart(product, quantity)">Add to Cart</button>
+  </div>
+  <div>
+    <h3>Reviews</h3>
+    <div *ngFor="let review of product.reviews">
+      <p>{{ review.userName }} ({{ review.date | date }}): {{ review.comment }}</p>
+      <p>Rating: {{ review.rating }}</p>
+    </div>
+    <div>
+      <h4>Add a Review</h4>
+      <label>Rating:</label>
+      <input type="number" [(ngModel)]="newReview.rating" min="1" max="5" />
+      <label>Comment:</label>
+      <textarea [(ngModel)]="newReview.comment"></textarea>
+      <button (click)="addReview()">Submit Review</button>
+    </div>
+  </div>
+</div>

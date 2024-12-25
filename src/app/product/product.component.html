@@ -1,0 +1,98 @@
+<div class="row">
+    <div class="col-md-12">
+        <ol class="breadcrumb">
+            <li><a routerLink="/products">Products</a></li>
+            <li class="active">{{ product.name }}</li>
+        </ol>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <img [src]="product.imageUrl || '/assets/img/placeholder.png'" 
+                     class="img-responsive" alt="{{ product.name }}">
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ product.name }}</h3>
+            </div>
+            <div class="panel-body">
+                <h4 class="text-primary">${{ product.price.toFixed(2) }}</h4>
+                
+                <div class="product-description">
+                    <h5>Description:</h5>
+                    <p>{{ product.description }}</p>
+                </div>
+                
+                <div class="product-specs" *ngIf="product.specifications">
+                    <h5>Specifications:</h5>
+                    <ul class="list-unstyled">
+                        <li *ngFor="let spec of product.specifications | keyvalue">
+                            <strong>{{ spec.key }}:</strong> {{ spec.value }}
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="form-group">
+                    <label>Quantity:</label>
+                    <select class="form-control" [(ngModel)]="quantity">
+                        <option *ngFor="let n of [1,2,3,4,5]" [value]="n">{{ n }}</option>
+                    </select>
+                </div>
+                
+                <button class="btn btn-lg btn-success" (click)="addToCart(product, quantity)">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+        
+        <!-- Reviews Section -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Customer Reviews</h3>
+            </div>
+            <div class="panel-body">
+                <div *ngFor="let review of product.reviews" class="review-item">
+                    <div class="review-header">
+                        <span class="rating">
+                            <i *ngFor="let star of [1,2,3,4,5]" 
+                               class="glyphicon" 
+                               [ngClass]="{'glyphicon-star': star <= review.rating, 'glyphicon-star-empty': star > review.rating}">
+                            </i>
+                        </span>
+                        <span class="reviewer">{{ review.userName }}</span>
+                        <span class="review-date pull-right">{{ review.date | date }}</span>
+                    </div>
+                    <p>{{ review.comment }}</p>
+                </div>
+                
+                <!-- Add Review Form -->
+                <form #reviewForm="ngForm" (ngSubmit)="reviewForm.valid && addReview()" novalidate>
+                    <div class="form-group">
+                        <label>Your Rating:</label>
+                        <select class="form-control" [(ngModel)]="newReview.rating" name="rating" required>
+                            <option value="5">5 Stars</option>
+                            <option value="4">4 Stars</option>
+                            <option value="3">3 Stars</option>
+                            <option value="2">2 Stars</option>
+                            <option value="1">1 Star</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Your Review:</label>
+                        <textarea class="form-control" [(ngModel)]="newReview.comment" name="comment" 
+                                  rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" 
+                            [disabled]="reviewForm.invalid">
+                        Submit Review
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-md-12">
+        <h2>Products</h2>
+        
+        <!-- Search and Sort Controls -->
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" 
+                                   placeholder="Search products..." 
+                                   [(ngModel)]="searchText" 
+                                   (ngModelChange)="searchProducts()">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="btn-group pull-right">
+                            <button type="button" class="btn btn-default" 
+                                    (click)="sortProducts('name')"
+                                    [ngClass]="{active: sortBy === 'name'}">
+                                Name 
+                                <span *ngIf="sortBy === 'name'">
+                                    <i class="glyphicon" 
+                                       [ngClass]="{'glyphicon-chevron-up': !reverse, 'glyphicon-chevron-down': reverse}"></i>
+                                </span>
+                            </button>
+                            <button type="button" class="btn btn-default" 
+                                    (click)="sortProducts('price')"
+                                    [ngClass]="{active: sortBy === 'price'}">
+                                Price
+                                <span *ngIf="sortBy === 'price'">
+                                    <i class="glyphicon" 
+                                       [ngClass]="{'glyphicon-chevron-up': !reverse, 'glyphicon-chevron-down': reverse}"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="row">
+            <div class="col-md-4" *ngFor="let product of searchProducts() | orderBy:sortBy:reverse">
+                <div class="panel panel-default product-panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{product.name}}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <img [src]="product.imageUrl || '/assets/img/placeholder.png'" 
+                             class="img-responsive" alt="{{product.name}}">
+                        <div class="product-price">${{product.price.toFixed(2)}}</div>
+                        <p class="product-description">{{product.description}}</p>
+                    </div>
+                    <div class="panel-footer">
+                        <a [routerLink]="['/products', product.id]" class="btn btn-primary">View Details</a>
+                        <button class="btn btn-success pull-right" 
+                                (click)="addToCart(product)">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- No Products Found Message -->
+        <div class="alert alert-info" *ngIf="searchProducts().length === 0">
+            No products found matching your search criteria.
+        </div>
+    </div>
+</div>

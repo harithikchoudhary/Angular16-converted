@@ -1,0 +1,23 @@
+.active {
+  background-color: #f5f5f5;
+}
+
+.panel {
+  margin-bottom: 20px;
+}
+
+.panel-heading {
+  padding: 10px 15px;
+}
+
+.panel-title {
+  margin: 0;
+}
+
+.list-group-item {
+  cursor: pointer;
+}
+
+.badge {
+  float: right;
+}

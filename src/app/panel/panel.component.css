@@ -1,0 +1,28 @@
+.panel {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.panel-primary {
+  border-color: #337ab7;
+}
+
+.panel-heading {
+  background-color: #337ab7;
+  border-color: #337ab7;
+  color: white;
+  padding: 10px 15px;
+  border-bottom: 1px solid transparent;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.panel-title {
+  margin: 0;
+  font-size: 16px;
+}
+
+.panel-body {
+  padding: 15px;
+}

@@ -1,0 +1,25 @@
+.product-description {
+  margin-top: 20px;
+}
+
+.product-specs {
+  margin-top: 20px;
+}
+
+.review-item {
+  margin-bottom: 20px;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rating .glyphicon {
+  color: #f0ad4e;
+}
+
+.rating .glyphicon-star-empty {
+  color: #ddd;
+}

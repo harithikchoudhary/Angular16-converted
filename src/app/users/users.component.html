@@ -1,0 +1,18 @@
+<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+<ul>
+  <li *ngFor="let user of users" (click)="selectUser(user)">{{ user.name }}</li>
+</ul>
+<div *ngIf="currentUser">
+  <h2>Edit User</h2>
+  <form (ngSubmit)="updateUser(currentUser)">
+    <label>
+      Name:
+      <input [(ngModel)]="currentUser.name" name="name" required>
+    </label>
+    <label>
+      Email:
+      <input [(ngModel)]="currentUser.email" name="email" required>
+    </label>
+    <button type="submit">Update</button>
+  </form>
+</div>
